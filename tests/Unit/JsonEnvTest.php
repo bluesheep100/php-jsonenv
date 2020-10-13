@@ -38,6 +38,32 @@ final class JsonEnvTest extends TestCase
     }
 
     /** @test */
+    public function can_load_arrays_and_javascript_objects_from_default_file_location()
+    {
+        $data = [
+            'FOO' => [
+                'bar',
+                'baz',
+            ],
+            'BAR' => [
+                'foo' => 'bar',
+            ],
+        ];
+        file_put_contents(static::$defaultFile, json_encode($data));
+
+        $env = new JsonEnv();
+        $env->load();
+
+        $this->assertArrayHasKey('FOO', $_ENV);
+        $this->assertArrayHasKey('BAR', $_ENV);
+        $this->assertCount(2, $_ENV['FOO']);
+        $this->assertEquals('bar', $_ENV['FOO'][0]);
+        $this->assertEquals('baz', $_ENV['FOO'][1]);
+        $this->assertArrayHasKey('foo', $_ENV['BAR']);
+        $this->assertEquals('bar', $_ENV['BAR']['foo']);
+    }
+
+    /** @test */
     public function can_get_readonly_array_of_environment_variables_from_jsonenv_instance()
     {
         // Create a config for testing
