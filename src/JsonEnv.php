@@ -55,6 +55,6 @@ class JsonEnv
             return;
         }
 
-        throw new ErrorException();
+        throw new ErrorException('Error while reading environment file. Check that the file is valid JSON.');
     }
 }
