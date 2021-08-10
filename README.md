@@ -1,6 +1,5 @@
 ## Installation
 ### Composer
-Run the following command:
 ```
 composer require bluesheep/php-jsonenv
 ```
@@ -12,7 +11,7 @@ A simple example:
 
 use JsonEnv/JsonEnv;
 
-$env = new JsonEnv();
+$env = new JsonEnv(__DIR__ . '/env.json');
 $env->load();
 ```
 
